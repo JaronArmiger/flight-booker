@@ -1,0 +1,18 @@
+<%= @booking.inspect %>
+<h2>Votre Information de Booking</h2>
+<h3>Information de Vol</h3>
+Depart de: <%=  @flight.from_airport.code %>
+<br>
+Arrive a: <%= @flight.to_airport.code %>
+<br>
+Heure de depart: <%= @flight.formatted_start_time %>
+<br>
+Duree: <%= @flight.duration %>
+<h3>Passagers</h3>
+<% @booking.passengers.each do |p| %>
+  <br>
+  Nom: <%= p.name %>
+  <br>
+  E-Mail: <%= p.email %>
+  <br>
+<% end %>

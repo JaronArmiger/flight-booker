@@ -1,0 +1,24 @@
+<h1>rechercher des vols</h1>
+
+<%= form_with(model: @flight, url: flights_path, method: 'get', local: true) do |f| %>
+  <%= f.label :from_airport_id, "Au depart de: " %>
+  <%= f.collection_select :from_airport_id, Airport.all, :id, :code %>
+  <br>
+  <%= f.label :to_airport_id, "Arrivee a: " %>
+  <%= f.collection_select :to_airport_id, Airport.all, :id, :code %>
+  <br>
+  <%= f.label :num_tickets, "Combien de Passagers? " %>
+  <%= f.select :num_tickets, options_for_select([[1,1],[2,2],
+  											   [3,3],[4,4]]) %>
+  <br>
+
+  <%= f.label :date, "Date de Depart: " %>
+  <%# f.collection_select :start_time, Flight.get_start_times, :start_time, :start_time_formatted %>
+  <br>
+
+  <%= f.date_select :date, start_year: Time.now.year,
+  								 end_year: 8.years.from_now.year %>
+  <br>
+
+  <%= f.submit "Recherche" %>
+<% end %>

@@ -1,0 +1,25 @@
+<% if params[:flight] %>
+	<%= form_with(url: new_booking_path, method: 'get', local: true) do %>
+	  <ul>
+	  <% @flights.each do |flight| %>
+	    <%= label_tag(:flight_id, "numero de vol: #{flight.id}") %>
+	      <li>
+      		Depart de: <%=  flight.from_airport.code %>
+      		<br>
+      		Arrive a: <%= flight.to_airport.code %>
+      		<br>
+      		Heure de depart: <%= flight.formatted_start_time %>
+      		<br>
+      		Duree: <%= flight.duration %>
+      	    <%= radio_button_tag(:flight_id, flight.id) %>
+          </li>
+          <br>
+	    <% end %>
+	  </ul>
+      <br>
+      <%= hidden_field_tag(:num_tickets, params[:flight][:num_tickets]) %>
+	  <br>
+	  <%= submit_tag "Choisir"%>
+	<% end %>
+
+<% end %>

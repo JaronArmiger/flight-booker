@@ -1,0 +1,32 @@
+<p><%= params.inspect %></p>
+<p><%= @booking.flight.inspect %></p>
+<h2>Booking Info</h2>
+
+<%= form_with(model: @booking, local: true) do |f| %>
+  <%= f.hidden_field(:flight_id, value: @flight.id) %>
+    <b>Votre Vol:</b>
+    <br>
+    ID de Vol: <%= @flight.id %>
+    <br>
+    Depart de: <%=  @flight.from_airport.code %>
+	<br>
+	Arrive a: <%= @flight.to_airport.code %>
+	<br>
+	Heure de depart: <%= @flight.formatted_start_time %>
+	<br>
+	<br>
+  Passagers:
+  <ul>
+  	<%= f.fields_for :passengers do |p_form| %>
+  	  <li>
+  	  	<%= p_form.label :name %>
+  	  	<%= p_form.text_field :name %>
+  	  	<br>
+  	  	<%= p_form.label :email %>
+  	  	<%= p_form.text_field :email %>
+  	  	<br>
+  	  </li>
+  	<% end %>
+  </ul>
+  <%= f.submit "reserver votre vol" %>
+<% end %>
